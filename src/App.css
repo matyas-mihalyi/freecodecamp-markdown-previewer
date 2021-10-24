@@ -1,38 +1,169 @@
+
+:root {
+  --dragbar-color: #cdcdcd;
+  --header-color: #cdcdcd;
+  --font-family-main: 'Source Sans Pro', sans-serif;
+  --font-family-code: 'Source Code Pro', monospace;
+  --font-color-main: #000;
+  --font-color-code: #000;
+  --font-color-header: #dedede;
+  --background-color: #fff;
+  --background-color-code: #eee;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dragbar-color: #2f2f2f;
+    --header-color: #2f2f2f;
+    --font-family-main: 'Source Sans Pro', sans-serif;
+    --font-family-code: 'Source Code Pro', monospace;
+    --font-color-main: #ddd;
+    --font-color-code: #ddd;
+    --font-color-header: #7f7f7f;
+    --background-color: #070707;
+    --background-color-code: #1f1f1f;
+  }
+}
+
+
+body {
+  background-color: var(--background-color);
+  max-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App * {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 100vh;
+  position: relative;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+header {
+  width: 100%;
+  height: 6vh;
+  background-color: var(--header-color);
+  padding: 0 2em;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--font-color-header) !important;
 }
 
-.App-link {
-  color: #61dafb;
+header > h1 {
+  flex: 1;
+  text-align: left;
+  height: 100%;
+  margin: 0;
+  font-size: 1.5rem;
+  font-family: var(--font-family-main);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+nav ul li {
+  cursor: pointer;
+  margin: 0 1em;
+}
+nav ul li:hover {
+  color: var(--font-color-main);
+}
+
+#editor, #preview {
+  padding: 2em 1.5em;
+  overflow-y: auto;
+  background-color: var(--background-color);
+  color: var(--font-color-main);
+}
+
+#editor {
+  width: 50%;
+  height: 100%;
+  float:left;
+  resize: none;
+  padding-right: calc(2em + 5px);
+  border: none;
+  font-family: var(--font-family-code);
+}
+
+#editor:focus{
+  outline: none;
+}
+
+#preview {
+  width: 50%;
+  height: 100%;
+  float: left;
+  text-align: start;
+  padding-left: calc(2em + 5px);
+  font-family: var(--font-family-main);
+}
+
+#preview * {
+  max-width: 100%;
+}
+
+#preview pre {
+  padding: 0.75em;
+  overflow-x: auto;
+  background-color: var(--background-color-code);
+  border-radius: 2px;
+}
+#preview code {
+  background-color: var(--background-color-code);
+  font-family: var(--font-family-code);
+  font-size: 0.9rem;
+}
+
+#dragbar {
+  position: absolute;
+  display: block;
+  width: 10px;
+  background-color: var(--dragbar-color);
+  height: calc(100% - 6vh);
+  left: calc(50% - 5px);
+  bottom: 0;
+  z-index: 100;
+  cursor: col-resize;
+}
+
+#dragbar:focus{
+  cursor: col-resize;
+}
+
+#dragbar::after {
+  content: "" ;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--dragbar-color);
+  position: absolute;
+  top: calc(50% - 20px);
+  left: calc(50% - 20px);
+  visibility: hidden;
+  opacity: 0;
+  transition: 1s opacity cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#dragbar:hover::after {
+  visibility: visible;
+  opacity: 1;
+}
+
+#dragbar:active::after {
+  visibility: visible;
+  opacity: 1;
 }

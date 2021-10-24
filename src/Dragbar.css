@@ -1,0 +1,10 @@
+#dragbar {
+  position: absolute;
+  width: 10px;
+  background-color: aquamarine;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  z-index: 100;
+  cursor: col-resize;
+}
