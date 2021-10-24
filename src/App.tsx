@@ -14,10 +14,14 @@ marked.setOptions({
 function App() {
 
   const [input, setInput] = useState<any>("");
-  const [prevInput, setPrevInput] = useState<any>("");
+  const [dragging, setDragging] = useState<boolean>(false);
   const [editorStyle, setEditorStyle] = useState({width:"50%"});
   const [dragbarStyle, setDragbarStyle] = useState({left: "calc(50% - 5px)"});
   const [previewStyle, setPreviewStyle] = useState({width: "50%"});
+  // const [shield, setShield] = useState({display: "none"});
+  const [undoEnabled, setUndoEnabled] = useState({display: "none"})
+  const [prevInput, setPrevInput] = useState<any>("");
+
   
 
   function updateInput (event:any) {
@@ -31,25 +35,49 @@ function App() {
   const downloadBtnRef = React.useRef<HTMLAnchorElement>(null);
 
   
-  const positionDragBar = (e:React.DragEvent) => {    
-    if (e.clientX !== 0) {
-      const percent = window.innerWidth / 100;
+  const dragStart = (e:React.MouseEvent) => {
+    e.preventDefault();
+    setDragging(true);
+  }
+
+  const dragMove = (e:React.MouseEvent) => {
+    const percent = window.innerWidth / 100;
+    if (dragging && e.clientX > (percent * 15) && e.clientX < (percent * 85)) {
       setEditorStyle({width: `${(window.innerWidth - (window.innerWidth - e.clientX))/percent}%`});
-      setPreviewStyle({width: `${100 - parseFloat(editorStyle.width.replace("%", ""))}%`})
+      setPreviewStyle({width: `${(window.innerWidth - e.clientX)/percent}%`});
       setDragbarStyle({left: `calc(${(window.innerWidth - (window.innerWidth - e.clientX))/percent}% - 5px)`});
     }
   }
+
+  const dragEnd = (e:React.MouseEvent) => {
+    if (dragging) {
+      setDragging(false);
+    }
+  }
+
+  // function shieldOn (e:React.DragEvent) {
+  //   e.preventDefault();
+  //   console.log("on")
+  //   setShield({display: "block"});
+  // }
+
+  // function shieldOff (e:React.DragEvent) {
+  //   e.preventDefault();
+  //   console.log("off")
+  //   setShield({display: "none"});
+  // }
 
   const placeholder = 
   `# Markdown Previewer
 ## powered by markedjs
 This is my submission for the second project of the [freeCodeCamp front end development libraries](https://www.freecodecamp.org/learn/front-end-development-libraries/) curriculum.
+
 You can write code in the editor between 2 backticks: \`<p>Hello World!</p>\`
 
 You can also write multi-line code between three backticks:
 \`\`\`
 function sayHello(name) {
-  return \`Hello \${name}!\`
+  return \`Hello \${name}!\`;
 }
 \`\`\`
 
@@ -83,20 +111,24 @@ You can even include images
 
   function clearEditior () {
     setPrevInput(input);
+    setUndoEnabled({display: "block"});
     setInput("");
   };
-
+  
   function undo () {
-    setInput(prevInput)
+    setInput(prevInput);
+    setUndoEnabled({display: "none"});
   };
 
+ 
+
   return (
-    <div className="App">
+    <div className="App" onMouseMove={dragMove} onMouseUp={dragEnd}>
       <header>
         <h1>Markdown Previewer</h1>
         <nav>
           <ul>
-            <li onClick={undo} title="clear editor">
+            <li onClick={undo} title="clear editor" style={undoEnabled}>
               <span className="material-icons-outlined">undo</span>
             </li>
             <li onClick={clearEditior} title="clear editor">
@@ -111,8 +143,12 @@ You can even include images
         </nav>
       </header>
       <textarea id="editor" onChange={updateInput} ref={editorRef} style={editorStyle} value={input} spellCheck="false"/>
-      <div id="preview" ref={previewRef} style={previewStyle} dangerouslySetInnerHTML={{__html: DOMpurify.sanitize(marked(input))}}></div>
-      <span id="dragbar" ref={dragBarRef} onDrag={positionDragBar} style={dragbarStyle}></span>
+
+      <div id="preview" ref={previewRef} style={previewStyle} dangerouslySetInnerHTML={{__html: DOMpurify.sanitize(marked(input))}} draggable="false"></div>
+
+      <span id="dragbar" ref={dragBarRef} onMouseDown={dragStart} style={dragbarStyle} draggable="true"></span>
+
+      {/* <div id="shield" style={shield}></div> */}
     </div>
   );
 };
