@@ -66,6 +66,13 @@ header > h1 {
   display: block;
 }
 
+
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
 nav ul {
   list-style: none;
   display: flex;
@@ -77,6 +84,9 @@ nav ul {
 nav ul li {
   cursor: pointer;
   margin: 0 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 nav ul li:hover {
   color: var(--font-color-main);
@@ -102,6 +112,7 @@ nav ul li:hover {
 #editor:focus{
   outline: none;
 }
+
 
 #preview {
   width: 50%;
@@ -136,7 +147,7 @@ nav ul li:hover {
   background-color: var(--dragbar-color);
   height: calc(100% - 6vh);
   left: calc(50% - 5px);
-  bottom: 0;
+  top: 6vh;
   z-index: 100;
   cursor: col-resize;
 }
@@ -144,38 +155,18 @@ nav ul li:hover {
 #dragbar:focus{
   cursor: col-resize;
 }
-/* 
-#dragbar::after {
-  content: "" ;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: var(--dragbar-color);
-  position: absolute;
-  top: calc(50% - 15px);
-  left: calc(50% - 15px);
-  visibility: hidden;
-  opacity: 0;
-  transition: 1s opacity cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+@media only screen and (max-width: 700px){
+  header {
+    padding: 0 1em;
+  }
+  header > h1 {
+    font-size: 1.25rem;
+  }
+  nav ul li {
+    margin: 0 0.75em;
+  }
+  nav span {
+    font-size: 1.25rem !important;
+  }
 }
-
-#dragbar:hover::after {
-  visibility: visible;
-  opacity: 1;
-}
-
-#dragbar:active::after {
-  visibility: visible;
-  opacity: 1;
-} */
-
-/* #shield {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: none;
-  z-index: 200;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,0.3);
-} */
