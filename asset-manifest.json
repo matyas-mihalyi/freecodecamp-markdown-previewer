@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.2d6a79d3.chunk.css",
-    "main.js": "/static/js/main.8b9673f5.chunk.js",
-    "main.js.map": "/static/js/main.8b9673f5.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.828972c2.js",
-    "runtime-main.js.map": "/static/js/runtime-main.828972c2.js.map",
-    "static/js/2.e6f9adad.chunk.js": "/static/js/2.e6f9adad.chunk.js",
-    "static/js/2.e6f9adad.chunk.js.map": "/static/js/2.e6f9adad.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.2d6a79d3.chunk.css.map": "/static/css/main.2d6a79d3.chunk.css.map",
-    "static/js/2.e6f9adad.chunk.js.LICENSE.txt": "/static/js/2.e6f9adad.chunk.js.LICENSE.txt"
+    "main.css": "/freecodecamp-markdown-previewer/static/css/main.2d6a79d3.chunk.css",
+    "main.js": "/freecodecamp-markdown-previewer/static/js/main.8b9673f5.chunk.js",
+    "main.js.map": "/freecodecamp-markdown-previewer/static/js/main.8b9673f5.chunk.js.map",
+    "runtime-main.js": "/freecodecamp-markdown-previewer/static/js/runtime-main.9ead8e11.js",
+    "runtime-main.js.map": "/freecodecamp-markdown-previewer/static/js/runtime-main.9ead8e11.js.map",
+    "static/js/2.e6f9adad.chunk.js": "/freecodecamp-markdown-previewer/static/js/2.e6f9adad.chunk.js",
+    "static/js/2.e6f9adad.chunk.js.map": "/freecodecamp-markdown-previewer/static/js/2.e6f9adad.chunk.js.map",
+    "index.html": "/freecodecamp-markdown-previewer/index.html",
+    "static/css/main.2d6a79d3.chunk.css.map": "/freecodecamp-markdown-previewer/static/css/main.2d6a79d3.chunk.css.map",
+    "static/js/2.e6f9adad.chunk.js.LICENSE.txt": "/freecodecamp-markdown-previewer/static/js/2.e6f9adad.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.828972c2.js",
+    "static/js/runtime-main.9ead8e11.js",
     "static/js/2.e6f9adad.chunk.js",
     "static/css/main.2d6a79d3.chunk.css",
     "static/js/main.8b9673f5.chunk.js"
